@@ -10,7 +10,7 @@ allprojects {
 在项目中的build.gradle添加依赖
 ```java
 dependencies {
-  implementation 'com.github.tianheng812:AndroidFreetype:1.1'
+  implementation 'com.github.tianheng812:AndroidFreetype:1.0'
 }
 ```
 
