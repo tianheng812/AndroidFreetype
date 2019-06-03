@@ -1,7 +1,8 @@
 #include <jni.h>
-#include "include/freetype/tttags.h"
-#include FT_FREETYPE_H
+//#include "include/freetype/tttags.h"
+//#include FT_FREETYPE_H
 #include <android/log.h>
+#include <freetype/tttags.h>
 
 #define LOG_TAG "FontDecode"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
