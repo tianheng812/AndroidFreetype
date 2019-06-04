@@ -30,6 +30,13 @@ add_library( freetype
              src/main/jni/src/pshinter/pshinter.c
              src/main/jni/src/native-freetype.c )
 
+add_definitions("-W -Wall")
+add_definitions("-fPIC -DPIC")
+add_definitions("-DDARWIN_NO_CARBON")
+add_definitions("-DFT2_BUILD_LIBRARY")
+add_definitions("-O2")
+
+
 find_library( log-lib
               log )
 
