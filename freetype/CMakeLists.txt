@@ -40,9 +40,5 @@ add_definitions("-O2")
 find_library( log-lib
               log )
 
-find_library( dl-lib dl)
-
-
 target_link_libraries(freetype
-                        ${log-lib}
-                        ${dl-lib})
+                        ${log-lib})
