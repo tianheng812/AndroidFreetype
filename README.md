@@ -2,7 +2,7 @@
 ```java
 allprojects {
    repositories {
-       maven { url 'https://jitpack.io' }
+      maven { url "https://raw.githubusercontent.com/tianheng812/AndroidFreetype/master" }
    }
 }
 ```
@@ -10,7 +10,7 @@ allprojects {
 在项目中的build.gradle添加依赖
 ```java
 dependencies {
-  implementation 'com.github.tianheng812:AndroidFreetype:2.1'
+    implementation 'com.xian:freestype:1.0.0'
 }
 ```
 
