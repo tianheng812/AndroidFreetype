@@ -3,9 +3,6 @@ package com.xian.freetypeDemo;
 import android.Manifest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,12 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xian.freetype.R;
-import com.xian.freetype.word.NdkFreeType;
 import com.xian.freetype.word.WordInfo;
 import com.xian.freetype.word.WordManager;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 获取字的信息
      *
-     * @param view
      */
     public void getWordInfo(View view) {
         if (!isRequestPermissionOk) {
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 获取字转bmp图片
      *
-     * @param view
      */
     public void stringToBmp2(View view) {
         if (!isRequestPermissionOk) {
@@ -189,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         String requestPermissionsResult = "";
         if (requestCode == 1) {
             for (int i = 0; i < permissions.length; i++) {

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.11)
 
 include_directories(src/main/jni/include)
 include_directories(src/main/jni/include/freetype)

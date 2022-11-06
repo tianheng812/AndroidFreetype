@@ -54,7 +54,7 @@ public class WordManager {
      */
     public synchronized boolean init(Context context) {
         this.context = context;
-        this.fontPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/font/simsun.ttc";
+        this.fontPath = this.context.getCacheDir().getAbsolutePath()+ "/font/simsun.ttc";
         File file = new File(fontPath);
         try {
             if (!file.exists()) {
@@ -146,7 +146,6 @@ public class WordManager {
      * 点阵转bmp字节数据
      *
      * @param bytes 点阵数据
-     * @return
      */
     public byte[] latticeToBmpByte(byte[][] bytes) {
         if (bytes == null) {

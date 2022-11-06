@@ -1,14 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'maven'
-group='com.github.tianheng812'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -42,42 +39,59 @@ android {
             }
         }
     }*/
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
 ext {
     // 从Github上clone下来的项目的本地地址
-    GITHUB_REPO_PATH = "F:\\MyDownloads\\AndroidFreetype"
-    // compile 'com.audienl:super_library:1.0.0'
+    GITHUB_REPO_PATH = "./../"
     PUBLISH_GROUP_ID = 'com.xian'
     PUBLISH_ARTIFACT_ID = 'freestype'
-    PUBLISH_VERSION = '1.0.0'
+    PUBLISH_VERSION = '1.0.1'
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        def deployPath = file(project.GITHUB_REPO_PATH)
-        repository(url: "file://${deployPath.absolutePath}")
-        pom.project {
-            groupId project.PUBLISH_GROUP_ID
-            artifactId project.PUBLISH_ARTIFACT_ID
-            version project.PUBLISH_VERSION
-        }
-    }
-}
 
-// 源代码一起打包(不需要打包源代码的不要添加这几行)
+apply plugin: 'maven-publish'
+
+// 源代码Jar一起打包，便于引入查看源码
 task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.getSrcDirs()
 }
 artifacts {
     archives androidSourcesJar
+}
+
+publishing {
+    repositories {
+        maven {
+            def deployPath = file(project.GITHUB_REPO_PATH)
+            url "file://${deployPath.absolutePath}" // 仓库地址
+        }
+    }
+}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+
+                groupId project.PUBLISH_GROUP_ID
+                artifactId project.PUBLISH_ARTIFACT_ID
+                version project.PUBLISH_VERSION
+                artifact androidSourcesJar
+            }
+        }
+    }
 }
