@@ -89,7 +89,13 @@ public class NdkFreeType {
         StringBuilder builder = new StringBuilder();
         int i, j, k, counter;
         byte temp;
-        for (j = 0; j < (fontSize * 26) / 32 - wordInfo.getBitmap_top(); j++) {
+
+
+        int size = (int) Math.floor(fontSize * 26 / 32.0f - wordInfo.getBitmap_top());
+        Log.i(TAG,"size1: "+(fontSize * 26 / 32.0f));
+        Log.i(TAG,"size2: "+(fontSize * 26 / 32.0f- wordInfo.getBitmap_top()));
+        Log.i(TAG,"size3: "+size);
+        for (j = 0; j < size; j++) {
             for (i = 0; i < h; i++) {
                 builder.append("_");
                 imagePixels[rows][i] = 1;
@@ -98,7 +104,7 @@ public class NdkFreeType {
             rows++;
         }
 
-        for (; j < wordInfo.getRows() + (fontSize * 26) / 32 - wordInfo.getBitmap_top(); j++) {
+        for (; j < wordInfo.getRows() + size; j++) {
             line = 0;
             for (i = 1; i <= wordInfo.getBitmap_left(); i++) {
                 builder.append("_");
@@ -151,7 +157,7 @@ public class NdkFreeType {
             builder.append("\n");
         }
 
-        Log.i(TAG, builder.toString());
+        Log.i(TAG, "111\n"+builder.toString());
 
         return imagePixels;
     }
@@ -209,8 +215,6 @@ public class NdkFreeType {
             }
         }
 
-
-        //Log.i("11122221111", arr.length + "  ---> " + arr[0].length);
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
@@ -223,7 +227,7 @@ public class NdkFreeType {
             builder.append("\n");
         }
 
-        Log.i(TAG, builder.toString());
+        Log.i(TAG, "\n"+builder.toString());
         return arr;
 
     }
