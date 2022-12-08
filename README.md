@@ -10,7 +10,7 @@ allprojects {
 在项目中的build.gradle添加依赖
 ```java
 dependencies {
-    implementation 'com.xian:freestype:1.0.0'
+    implementation 'com.xian:freestype:1.0.1'
 }
 ```
 
